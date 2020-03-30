@@ -566,8 +566,8 @@ function renderWhiteboards() {
 	doc.setFillColor(255);
 
 	var today = new Date();
-	var date = today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear();
-	var time = today.getHours() + ":" + today.getMinutes();
+	var date = (""+today.getDate()).padStart(2, "0")+'/'+(""+(today.getMonth()+1)).padStart(2, "0")+'/'+today.getFullYear();
+	var time = (""+today.getHours()).padStart(2, "0") + ":" + (""+today.getMinutes()).padStart(2, "0");
 	var timestamp = time + " " + date;
 	var dateTime = date+' '+time;
 
