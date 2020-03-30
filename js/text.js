@@ -1,9 +1,10 @@
 const textColors = {"black": [0, 0, 0],
 					"red": [255, 0, 0],
 					"blue": [0, 0, 255],
-					"green": [0, 255, 0],
+					"green": [0, 128, 0],
 					"yellow": [255, 255, 0],
-					"white": [255, 255, 255]};
+					"purple": [128, 0, 128],
+					"pink": [255,192,203]};
 
 class Word {
 	constructor(value, bold=false, italic=false, color=(0,0,0)) {
@@ -15,6 +16,7 @@ class Word {
 		this.x = -Infinity;
 		this.y = -Infinity;
 		this.textIndex = -Infinity;
+		this.actualLength = 0;
 		this.page = -1;
 	}
 
@@ -105,9 +107,11 @@ function wrap(text, maxWidth, canvas, cursorPos) {
 	let italic = false;
 	let c = color(0);
 	for (let i=0; i<words.length; i++) {
+		let actualLength = words[i].length;
 		if (words[i] === "{pagebreak}") {
 			words[i] = new Word("");
 			words[i].newpage = true;
+			words[i].actualLength = actualLength;
 		} else {
 			bold ^= /^[\*_]*\*/g.test(words[i]);
 			italic ^= /^[\*_]*_/g.test(words[i]);
@@ -123,6 +127,7 @@ function wrap(text, maxWidth, canvas, cursorPos) {
 				}
 			}
 			words[i] = new Word(words[i], bold, italic, c);
+			words[i].actualLength = actualLength;
 
 			bold ^= /\*[\*_]*$/g.test(words[i].value);
 			italic ^= /_[\*_]*$/g.test(words[i].value);

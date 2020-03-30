@@ -39,7 +39,7 @@ function overlay() {
 	} else {
 		let colliding = false;
 		let desiredX = constrain(mouseX + dragOffsetX, iconSize/2, width-iconSize/2);
-		let desiredY = constrain(mouseY + dragOffsetY, iconSize/2, width-iconSize/2);
+		let desiredY = constrain(mouseY + dragOffsetY, iconSize/2 + textSize(), height-iconSize/2);
 		for (let wb of whiteboards) {
 			if (wb !== dragging && abs(wb.x - desiredX) <= iconSize && abs(wb.y - desiredY) <= iconSize) {
 				colliding = true;
@@ -72,11 +72,13 @@ function keyPressed() {
 				if (writingOn === null) {
 					$("#whiteboard").removeClass("hide");
 					$("#tooltip").removeClass("hide");
+					$("#richTextButtons").removeClass("hide");
 					writingOn = wb;
 					$("#whiteboard").val(wb.text);
 				} else {
 					$("#whiteboard").addClass("hide");
 					$("#tooltip").addClass("hide");
+					$("#richTextButtons").addClass("hide");
 					writingOn = null;
 				}
 			}
@@ -120,10 +122,14 @@ function overlayClick(isBlocked) {
 	if (0 <= mouseX && mouseX <= width && 0 <= mouseY && mouseY <= height) {
 		if (dragging === null && !isBlocked) {
 			let collides = false;
-			for (let wb of whiteboards) {
-				if (abs(wb.x - mouseX) <= iconSize && abs(wb.y - mouseY) <= iconSize) {
-					collides = true;
-					break;
+			if (mouseY <= iconSize/2 + textSize()) {
+				collides = true;
+			} else {
+				for (let wb of whiteboards) {
+					if (abs(wb.x - mouseX) <= iconSize && abs(wb.y - mouseY) <= iconSize) {
+						collides = true;
+						break;
+					}
 				}
 			}
 			if (!collides) {

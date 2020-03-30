@@ -143,3 +143,54 @@ textarea {
 #helpCell {
 	height: 70px;
 }
+
+#richTextButtons {
+	height: 40px;
+	display: block;
+	margin-top: 20px;
+}
+
+.richTextButton {
+	vertical-align: middle
+	font-size: 20px;
+	padding: 2px 5px 2px 5px;
+	background-color: white;
+	width: 30px;
+	margin: 0px 5px 0px 5px;
+}
+
+.richTextButton:hover {
+	outline: 1px solid black;
+}
+
+.richTextButton:active {
+	outline: 2px solid black;
+}
+
+#black {
+	background-color: black;
+}
+
+#red {
+	background-color: red;
+}
+
+#green {
+	background-color: green;
+}
+
+#blue {
+	background-color: blue;
+}
+
+#yellow {
+	background-color: yellow;
+}
+
+#purple {
+	background-color: purple;
+}
+
+#pink {
+	background-color: pink;
+}

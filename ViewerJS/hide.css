@@ -2,22 +2,27 @@
 	display: none;
 }
 
-#canvas {
-	width: 100% !important;
-	height: 100% !important;
+body {
+
 }
 
-#canvas div {
-	width: 1200px !important;
-	height: 600px !important;
+#canvas {
+	box-shadow: none !important;
+	-webkit-box-shadow: none !important;
 }
 
 #canvasContainer {
 	width: 100% !important;
 	height: 100% !important;
 	top: 0px !important;
+	background-color: white !important;
+	background-image: none !important;
 }
 
 *[styleid] {
 	display: none !important;
+
+
+document {
+	width: 100% !important;
 }

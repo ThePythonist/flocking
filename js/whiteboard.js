@@ -142,7 +142,7 @@ class Whiteboard {
 	draw(playerX, playerY, floating=false) {
 		this.calcOffset();
 		this.x = constrain(this.x, iconSize/2, width-iconSize/2);
-		this.y = constrain(this.y, iconSize/2, height-iconSize/2);
+		this.y = constrain(this.y, iconSize/2 + textSize(), height-iconSize/2);
 
 		if (this.graphics.length === 0) {
 			this.render();

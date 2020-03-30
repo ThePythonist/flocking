@@ -55,6 +55,7 @@ let others = {};
 
 socket.on("connect", function () {
 	$("#renderwhiteboards").on("click", renderWhiteboards);
+	setUpButtons();
 	if (participating) {
 		let parts = window.location.href.split("/client-");
 		room = parts[parts.length-1];
@@ -532,6 +533,7 @@ function draw() {
 			if (whiteboard.isNear(x, y)) {
 				found = true;
 				$("#whiteboard").removeClass("hide");
+				$("#richTextButtons").removeClass("hide");
 				$("#tooltip").removeClass("hide");
 				writingOn = whiteboard;
 				$("#whiteboard").val(whiteboard.text);
@@ -540,6 +542,7 @@ function draw() {
 		}
 		if (!found) {
 			$("#whiteboard").addClass("hide");
+			$("#richTextButtons").addClass("hide");
 			$("#tooltip").addClass("hide");
 			writingOn = null;
 		}
@@ -624,3 +627,225 @@ document.addEventListener('contextmenu', function (event) {
 		event.preventDefault();
 	}
 });
+
+function getTextSelection(el) {
+	var start = 0, end = 0, normalizedValue, range,
+		textInputRange, len, endRange;
+
+	if (typeof el.selectionStart == "number" && typeof el.selectionEnd == "number") {
+		start = el.selectionStart;
+		end = el.selectionEnd;
+	} else {
+		range = document.selection.createRange();
+
+		if (range && range.parentElement() == el) {
+			len = el.value.length;
+			normalizedValue = el.value.replace(/\r\n/gm, "\n");
+
+			// Create a working TextRange that lives only in the input
+			textInputRange = el.createTextRange();
+			textInputRange.moveToBookmark(range.getBookmark());
+
+			// Check if the start and end of the selection are at the very end
+			// of the input, since moveStart/moveEnd doesn't return what we want
+			// in those cases
+			endRange = el.createTextRange();
+			endRange.collapse(false);
+
+			if (textInputRange.compareEndPoints("StartToEnd", endRange) > -1) {
+				start = end = len;
+			} else {
+				start = -textInputRange.moveStart("character", -len);
+				start += normalizedValue.slice(0, start).split("\n").length - 1;
+
+				if (textInputRange.compareEndPoints("EndToEnd", endRange) > -1) {
+					end = len;
+				} else {
+					end = -textInputRange.moveEnd("character", -len);
+					end += normalizedValue.slice(0, end).split("\n").length - 1;
+				}
+			}
+		}
+	}
+	return {start: start, end: end};
+}
+
+
+function setUpButtons() {
+	String.prototype.splice = function(idx, rem, str) {
+		return this.slice(0, idx) + str + this.slice(idx + Math.abs(rem));
+	};
+	$("#bold").on("click", function() {
+		let selection = getTextSelection($("#whiteboard")[0]);
+		let words = writingOn.words;
+		let a;
+		let b;
+		let selected;
+		for (let word of words) {
+			if (word.textIndex <= selection.start) {
+				a = word.textIndex;
+			}
+
+			if (word.textIndex <= selection.end) {
+				b = word.textIndex + word.actualLength;
+			} else {
+				break;
+			}
+		}
+		let text = $("#whiteboard").val();
+		selected = text.substring(a, b);
+		if (/^[\*_]*\*/gm.test(selected)) {
+			if (/^[\*_]*_/gm.test(selected)) {
+				selected = "_" + selected.replace(/^[\*_]*/gm, "");
+			} else {
+				selected = selected.replace(/^[\*_]*/gm, "");
+			}
+		} else {
+			if (/^[\*_]*_/gm.test(selected)) {
+				selected = "_*" + selected.replace(/^[\*_]*/gm, "");
+			} else {
+				selected = "*" + selected.replace(/^[\*_]*/gm, "");
+			}
+		}
+
+		if (/\*[\*_]*$/gm.test(selected)) {
+			if (/_[\*_]*$/gm.test(selected)) {
+				selected = selected.replace(/[\*_]*$/gm, "") + "_";
+			} else {
+				selected = selected.replace(/[\*_]*$/gm, "");
+			}
+		} else {
+			if (/_[\*_]*$/gm.test(selected)) {
+				selected = selected.replace(/[\*_]*$/gm, "") + "*_";
+			} else {
+				selected = selected.replace(/[\*_]*$/gm, "") + "*";
+			}
+		}
+		text = text.splice(a, b-a, selected);
+		$("#whiteboard").val(text);
+		write();
+		setCaretToPos($("#whiteboard")[0], a + selected.length);
+	});
+
+	$("#italics").on("click", function() {
+		let selection = getTextSelection($("#whiteboard")[0]);
+		let words = writingOn.words;
+		let a;
+		let b;
+		let selected;
+		for (let word of words) {
+			if (word.textIndex <= selection.start) {
+				a = word.textIndex;
+			}
+
+			if (word.textIndex <= selection.end) {
+				b = word.textIndex + word.actualLength;
+			} else {
+				break;
+			}
+		}
+		let text = $("#whiteboard").val();
+		selected = text.substring(a, b);
+		if (/^[\*_]*_/gm.test(selected)) {
+			if (/^[\*_]*\*/gm.test(selected)) {
+				selected = "*" + selected.replace(/^[\*_]*/gm, "");
+			} else {
+				selected = selected.replace(/^[\*_]*/gm, "");
+			}
+		} else {
+			if (/^[\*_]*\*/gm.test(selected)) {
+				selected = "_*" + selected.replace(/^[\*_]*/gm, "");
+			} else {
+				selected = "_" + selected.replace(/^[\*_]*/gm, "");
+			}
+		}
+
+		if (/_[\*_]*$/gm.test(selected)) {
+			if (/\*[\*_]*$/gm.test(selected)) {
+				selected = selected.replace(/[\*_]*$/gm, "") + "*";
+			} else {
+				selected = selected.replace(/[\*_]*$/gm, "");
+			}
+		} else {
+			if (/\*[\*_]*$/gm.test(selected)) {
+				selected = selected.replace(/[\*_]*$/gm, "") + "*_";
+			} else {
+				selected = selected.replace(/[\*_]*$/gm, "") + "_";
+			}
+		}
+		text = text.splice(a, b-a, selected);
+		$("#whiteboard").val(text);
+		write();
+		setCaretToPos($("#whiteboard")[0], a + selected.length);
+	});
+
+	$("#pagebreak").on("click", function() {
+		let selection = getTextSelection($("#whiteboard")[0]);
+		let text = $("#whiteboard").val();
+		text = text.splice(selection.start, 0, "\n{pagebreak}\n");
+		console.log(text);
+		$("#whiteboard").val(text);
+		write();
+		setCaretToPos($("#whiteboard")[0], selection.start + 13);
+
+	});
+
+	for (let color in textColors) {
+		$(`#${color}`).on("click", function() {
+			let selection = getTextSelection($("#whiteboard")[0]);
+			let words = writingOn.words;
+			let a;
+			let b;
+			let selected;
+			let lastColor = null;
+			for (let word of words) {
+				if (word.textIndex <= selection.start) {
+					a = word.textIndex;
+				}
+
+				if (word.textIndex <= selection.end) {
+					b = word.textIndex + word.actualLength;
+					lastColor = word.color;
+				} else {
+					break;
+				}
+			}
+			let lastColorName;
+			let q = lastColor.levels;
+			for (let color in textColors) {
+				let p = textColors[color];
+				if (p[0] === q[0] && p[1] === q[1] && p[2] === q[2]) {
+					lastColorName = color;
+					break;
+				}
+			}
+
+			let text = $("#whiteboard").val();
+			selected = text.substring(a, b);
+
+			if (/^[\*_]*{[^{}]*}/gm.test(selected)) {
+				let leading = "";
+				if (/^[\*_]*_/gm.test(selected)) {
+					leading += "_";
+				}
+				if (/^[\*_]*\*/gm.test(selected)) {
+					leading += "*";
+				}
+				selected = selected.replace(/^[\*_]*{[^{}]*}/gm, `${leading}{${color}}`);
+			} else {
+				selected = `{${color}}${selected}`;
+			}
+
+			if (!/{[^{}]*}[\*_]*$/gm.test(selected)) {
+				selected += `{${lastColorName}}`;
+			}
+
+			selected = selected.replace(/^([^\*_]+){[^{}]*}([^\*_]+)$/gm, "$1$2");
+
+			text = text.splice(a, b-a, selected);
+			$("#whiteboard").val(text);
+			write();
+			setCaretToPos($("#whiteboard")[0], a + selected.length);
+		})
+	}
+}
