@@ -1,0 +1,23 @@
+.hide {
+	display: none;
+}
+
+#canvas {
+	width: 100% !important;
+	height: 100% !important;
+}
+
+#canvas div {
+	width: 1200px !important;
+	height: 600px !important;
+}
+
+#canvasContainer {
+	width: 100% !important;
+	height: 100% !important;
+	top: 0px !important;
+}
+
+*[styleid] {
+	display: none !important;
+}

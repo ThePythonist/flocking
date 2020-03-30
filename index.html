@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+		<script src="./js/FileSaver.min.js"></script>
+		<script src="./js/socketio-file-upload-client.js"></script>
+		<script src="./js/text.js"></script>
+		<script src="./js/whiteboard.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<script>
+			var participating = true;
+		</script>
+		<script src="js/sketch.js"></script>
+		<table>
+			<tbody>
+				<tr>
+					<td id="canvasCell">
+					</td>
+				</tr>
+				<tr>
+					<td id="nameCell">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div id="tooltip" class="hide">?
+							<span id="help">
+								<p>Type some text into the text area on the left and it will appear on the whiteboard in the movement area</p>
+								<p>To put some text in bold, place asterisks on either side like so:</p>
+								<p class="demo">*This is in bold.*</p>
+								<p>To put some text in italics, place underscores on either side like so:</p>
+								<p class="demo">_This is in italics._</p>
+								<p>To change the colour of the text, write the name of the colour in curly brackets like so:</p>
+								<p class="demo">{red}This is in red.</p>
+								<p>To force a page break, type {pagebreak} like so:</p>
+								<p class="demo">This is on page 1.<br />{pagebreak}<br />This is on page 2.</p>
+							</span>
+						</div>
+						<textarea id="whiteboard" class="hide highlight" rows="7" cols="65" placeholder="Write something on the whiteboard!"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button id="renderwhiteboards" class="hide">Export Whiteboards to PDF</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>

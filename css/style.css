@@ -1,0 +1,145 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	background-color: white;
+	text-align: center;
+}
+
+table {
+	display:inline-table;
+	margin-top: 50px;
+}
+
+iframe {
+	border: none;
+}
+
+*:focus {
+	outline: none;
+}
+
+* {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+}
+
+*:not(.highlight) {
+	user-select: none; /* supported by Chrome and Opera */
+	-webkit-user-select: none;  Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+#background {
+	position: absolute;
+	top: 0px;
+	left: 1px;
+	border-radius: 10px;
+	border: 2px solid black;
+}
+
+
+canvas {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	border: 2px solid black;
+	border-radius: 10px;
+	position:absolute;
+	z-index: 10;
+	top: 0px;
+}
+
+#canvasCell {
+	position: relative;
+	width: 1200px;
+	height: 650px;
+}
+
+button {
+	background-color: #fecfff;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin: 20px;
+	border: 2px solid black;
+	border-radius: 10px;
+	font-weight: bold;
+	display: inline-block;
+	width: 250px;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+button:hover {
+	background-color: #fdb0ff;
+}
+
+button:active {
+	background-color: #fc66ff;
+}
+
+input, select {
+	border: 2px solid black;
+	font-size: 20px;
+	margin-top: 20px;
+	text-align: center;
+}
+
+button.dangerous {
+	background-color: #ff0000;
+}
+
+button.dangerous:hover {
+	background-color: #a8325a;
+}
+
+button.dangerous:active {
+	background-color: #5c0f29;
+}
+
+.hide {
+	display: none!important;
+}
+
+textarea { 
+	border: 2px solid black;
+	resize: vertical;
+	width: 80%;
+}
+
+#tooltip {
+	background: #b5f9ff;
+	display: inline-block;
+	border: 2px solid black;
+	border-radius: 5px;
+	position: relative;
+	padding: 2px 5px 2px 5px;
+	vertical-align: top;
+}
+
+#help {
+	display: none;
+	position: absolute;
+	width: 300px;
+	background-color: #f2feff;
+	border: 2px solid black;
+	padding: 4px;
+}
+
+#tooltip:hover #help, #help:hover{
+	display: initial!important;
+}
+
+.demo {
+	background-color: #ffffff;
+	border: 1px solid black;
+	text-align: left;
+	padding: 2px;
+}
+
+#helpCell {
+	height: 70px;
+}
