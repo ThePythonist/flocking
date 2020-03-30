@@ -509,11 +509,11 @@ function draw() {
 	for (var id in others) {
 		let other = others[id];
 		if (millis() - other.time < 5000) {
-			noStroke();
-			fill(0);
+			stroke(0);
+			strokeWeight(1);
+			fill(other.r, other.g, other.b);
 			textSize(20);
 			text(other.name, other.x, other.y+radius);
-			fill(other.r, other.g, other.b);
 			stroke(0);
 			strokeWeight(2);
 			ellipse(other.x, other.y, radius, radius);
