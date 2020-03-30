@@ -440,7 +440,7 @@ function draw() {
 			text("Waiting for the facilitator to start the exercise", width/2, 10)
 		} else if (stage === "playing") {
 			if (!paused) {
-				let speed = 0.05 * deltaTime;
+				let speed = 0.08 * deltaTime;
 				if (!$("input").is(":focus") && !$("textarea").is(":focus")) {
 					if (keyIsDown(LEFT_ARROW)) {
 						x -= speed;
