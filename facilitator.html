@@ -88,53 +88,35 @@
                         </td>
                     </tr>
                     <tr>
-                        <td id="reset">
-
-                        </td>
-                        <td id="pause">
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="file" id="odpfile" accept=".odp" />
-                            <label for="odpfile" class="upload_btn">Upload</label>
-                        </td>
-                        <td>
-                            <button id="submitodp">Submit Template</button>
-                        </td>
-                    </tr>
-                    <tr>
                         <td colspan="2" id="iframeCell">
 
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <button id="setBG">Set Background</button>
-                        </td>
-                        <td>
-                            <button id="removeBG">Remove Background</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button id="renderwhiteboards" class="hide">Export Whiteboards to PDF</button>
-                        </td>
-                        <td>
-                            <button onclick="location.href = './restore';">Restore a Room</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button class="dangerous" id="deleteRoom">Delete Room</button>
-                        </td>
-                        <td>
-                            <button class="dangerous" id="deleteAllRooms">Delete All Rooms</button>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
+            <div class="button_grids">
+                <div class="button_grid">
+                    <input type="file" id="odpfile" accept=".odp" />
+                    <label for="odpfile" class="upload_btn">Upload</label>
+                </div>
+                <div class="button_grid" id="reset"></div>
+                <div class="button_grid" id="pause"></div>
+                <div class="button_grid">
+                    <button id="submitodp">Submit Template</button>
+                </div><div class="button_grid">
+                    <button id="setBG">Set Background</button>
+                </div><div class="button_grid">
+                    <button id="removeBG">Remove Background</button>
+                </div><div class="button_grid" id="renderwhiteboards">
+                    <button>Export Whiteboards to PDF</button>
+                </div><div class="button_grid">
+                    <button onclick="location.href = './restore';">Restore a Room</button>
+                </div><div class="button_grid">
+                    <button class="dangerous" id="deleteRoom">Delete Room</button>
+                </div><div class="button_grid">
+                    <button class="dangerous" id="deleteAllRooms">Delete All Rooms</button>
+                </div>
+            </div>
         </div>
         <footer>
             <div class="c">
@@ -143,7 +125,7 @@
                     <div class="copyright_seperator">-</div>
                     <a class="footer_menu" target="_blank" href="https://mayvin.co.uk/terms-and-conditions"><span>Terms & conditions</span></a>
                     <a class="footer_menu" target="_blank" href="https://mayvin.co.uk/privacy-policy"><span>privacy policy</span></a>
-                    <a class="footer_menu backtotop"><span>Back to top</span></a>
+                    <a class="footer_menu backtotop" onclick="window.scroll({top: 0,left: 0,behavior: 'smooth'});" ><span>Back to top</span></a>
                 </div>
             </div>
         </footer>

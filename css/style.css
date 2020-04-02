@@ -146,7 +146,7 @@ textarea {
 }
 
 #helpCell {
-    height: 70px;
+    padding: 20px;
 }
 
 #richTextButtons {
@@ -219,7 +219,7 @@ body{
 .header_section {
     display: flex;
     justify-content: space-between;
-    padding-top: 68px;
+    padding-top: 40px;
 }
 .logo {
     display: inline-block;
@@ -236,6 +236,8 @@ body{
 }
 .facilitatortable{
     width: 100%;
+    margin-top: 40px;
+    text-align: left;
 }
 .facilitatortable canvas{
     box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.1);
@@ -289,13 +291,13 @@ body{
     position: absolute;
     bottom: 0;
     left: 0;
-    transform: scaleX(1);
+    transform: scaleX(0);
     transform-origin: 0 50%;
     background: rgba(0, 0, 0, 0.5);
     transition: all .4s;    
 }
 .footer_menu:hover span:before{
-    transform: scaleX(0);
+    transform: scaleX(1);
 }
 .backtotop.footer_menu{
     padding-right: 0;
@@ -330,6 +332,7 @@ body{
     transform: scaleX(0);
 }
 button , button.dangerous , .upload_btn{
+    text-align: left;
     background: #F0944E;
     font-family: 'Open Sans', sans-serif;
     color: #fff;
@@ -339,11 +342,14 @@ button , button.dangerous , .upload_btn{
     border: none;
     border-radius: 0;
     padding: 19px 80px 19px 24px;
-    width: auto;
     line-height: 1.4;
     transition: background .4s , color .4s;
     position: relative;
     cursor: pointer;
+    display: block;
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
 }
 button:before  , .upload_btn:before{
     content: '';
@@ -393,6 +399,7 @@ input.highlight {
     text-align: left;
     color: #000;
     min-width: 270px;
+    margin: 0;
 }
 input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     color: #000;
@@ -440,4 +447,20 @@ select {
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;    
+}
+.button_grid {
+    display: inline-block;
+    width: 33.33%;
+    padding: 30px 10px 0;
+    text-align: left;
+    box-sizing: border-box;
+}
+.button_grids {
+    margin: 0 -10px;
+    font-size: 0;
+}
+.inputfile {
+    padding-top: 30px;
+    max-width: 430px;
+    margin: auto;
 }
