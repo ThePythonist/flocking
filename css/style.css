@@ -216,6 +216,12 @@ body{
     text-transform: uppercase;
     color: #000000;
 }
+.med_title{
+    margin: 40px 0 0 0;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: #000000;    
+}
 .header_section {
     display: flex;
     justify-content: space-between;
@@ -466,4 +472,10 @@ select {
     padding-top: 30px;
     max-width: 430px;
     margin: auto;
+}
+#iframeCell {
+    padding-top: 30px;
+}
+#iframeCell:empty {
+    padding-top: 0;
 }

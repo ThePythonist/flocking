@@ -1,19 +1,47 @@
 <html>
-	<head>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-		<link rel="stylesheet" href="css/restore.css">
-	</head>
-	<body>
-		<script src="js/restore.js"></script>
-		<h1>Restore a room</h1>
-		<br />
-		<button onclick="refresh()">Refresh</button>
-		<button onclick="deleteAll()">Delete All Backups</button>
-		<br />
-		<table>
-			<tbody>
-			</tbody>
-		</table>
-	</body>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="css/restore.css">
+        <link rel="stylesheet" type="text/css" href="css/fonts.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+    <body>
+        <script src="js/restore.js"></script>
+        <header>
+            <div class="c">
+                <div class="header_section">
+                    <h1 class="title">Virtual Training Room</h1>
+                    <a class="logo" target="_blank" href="http://mayvin.co.uk/">
+                        <img src="css/images/mayvinlogo.svg" class="logoimg">
+                    </a>
+                </div>
+            </div>
+        </header>
+        <div class="c">
+            <h1  class="med_title">Restore a room</h1>
+            <div class="button_grids">
+                <div class="button_grid">
+                    <button onclick="refresh()">Refresh</button>
+                </div><div class="button_grid">
+                    <button onclick="deleteAll()">Delete All Backups</button>
+                </div>
+            </div>
+            <table>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <footer>
+            <div class="c">
+                <div class="footer_section">
+                    <div class="copyright_txt">copyright 2020 mayvin</div>
+                    <div class="copyright_seperator">-</div>
+                    <a class="footer_menu" target="_blank" href="https://mayvin.co.uk/terms-and-conditions"><span>Terms & conditions</span></a>
+                    <a class="footer_menu" target="_blank" href="https://mayvin.co.uk/privacy-policy"><span>privacy policy</span></a>
+                    <a class="footer_menu backtotop" onclick="window.scroll({top: 0, left: 0, behavior: 'smooth'});" ><span>Back to top</span></a>
+                </div>
+            </div>
+        </footer>        
+    </body>
 </html>
