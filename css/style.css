@@ -206,7 +206,7 @@ body{
     background-size: cover;
 }
 .c {
-    max-width: 1326px;
+    max-width: 1200px;
     margin: auto;
     padding: 0 60px;
 }
@@ -250,7 +250,7 @@ body{
     justify-content: space-between;
     max-width: 630px;
     margin: auto;
-    padding: 34px 0;
+    padding: 80px 0 34px;
 }
 .footer_menu {
     display: inline-block;
@@ -454,6 +454,9 @@ select {
     padding: 30px 10px 0;
     text-align: left;
     box-sizing: border-box;
+}
+.button_grid.nopadding{
+    padding-top: 0;
 }
 .button_grids {
     margin: 0 -10px;
