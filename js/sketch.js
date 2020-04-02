@@ -18,7 +18,7 @@ let room;
 let loaded = false;
 let dragging = null;
 p5.disableFriendlyErrors = true;
-const url = "http://86.169.164.85";
+const url = "http://localhost";
 var socket = io(url+":3000");
 var bgfilename = null;
 var whiteboards = [];

@@ -1,126 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
-		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-		<script src="./js/FileSaver.min.js"></script>
-		<script src="./js/socketio-file-upload-client.js"></script>
-		<script src="./js/text.js"></script>
-		<script src="./js/whiteboard.js"></script>
-		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<meta charset="utf-8" />
-	</head>
-	<body>
-		<script>
-			var participating = false;
-		</script>
-		<script src="js/sketch.js"></script>
-		<script src="js/overlay.js"></script>
-		<table>
-			<tbody>
-				<tr>
-					<td colspan="2">
-						Select Room: <select id="rooms"></select> 
-					</td>
-				</tr>
-				<tr>
-					<td id="helpCell" colspan="2">
-						
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2" id="canvasCell">
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<div id="richTextButtons" class="hide">
-							<button id="bold" class="richTextButton"><b>B</b></button>
-							<button id="italics" class="richTextButton"><i>I</i></button>
-							<button id="black" class="richTextButton">&nbsp;</button>
-							<button id="red" class="richTextButton">&nbsp;</button>
-							<button id="blue" class="richTextButton">&nbsp;</button>
-							<button id="green" class="richTextButton">&nbsp;</button>
-							<button id="yellow" class="richTextButton">&nbsp;</button>
-							<button id="purple" class="richTextButton">&nbsp;</button>
-							<button id="pink" class="richTextButton">&nbsp;</button>
-							<button id="pagebreak" class="richTextButton">P</button>
-						</div>
-					</td>
-				</tr>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="./js/FileSaver.min.js"></script>
+        <script src="./js/socketio-file-upload-client.js"></script>
+        <script src="./js/text.js"></script>
+        <script src="./js/whiteboard.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/fonts.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <script>
+            var participating = false;
+        </script>
+        <script src="js/sketch.js"></script>
+        <script src="js/overlay.js"></script>
+        <header>
+            <div class="c">
+                <div class="header_section">
+                    <h1 class="title">Virtual Training Room</h1>
+                    <a class="logo" target="_blank" href="http://mayvin.co.uk/">
+                        <img src="css/images/mayvinlogo.svg" class="logoimg">
+                    </a>
+                </div>
+            </div>
+        </header>
+        <div class="c">
+            <table class="facilitatortable">
+                <tbody>
+                    <tr>
+                        <td colspan="2">
+                            Select Room: <span class="select_wrap"><select id="rooms"></select> </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="helpCell" colspan="2">
 
-				<tr>
-					<td colspan="2">
-						<div id="tooltip" class="hide">?
-							<span id="help">
-								<p>Type some text into the text area on the left and it will appear on the whiteboard in the movement area</p>
-								<p>To put some text in bold, place asterisks on either side like so:</p>
-								<p class="demo">*This is in bold.*</p>
-								<p>To put some text in italics, place underscores on either side like so:</p>
-								<p class="demo">_This is in italics._</p>
-								<p>To change the colour of the text, write the name of the colour in curly brackets like so:</p>
-								<p class="demo">{red}This is in red.</p>
-								<p>To force a page break, type {pagebreak} like so:</p>
-								<p class="demo">This is on page 1.<br />{pagebreak}<br />This is on page 2.</p>
-							</span>
-						</div>
-						<textarea id="whiteboard" class="hide highlight" rows="7" cols="65" placeholder="Write something on the whiteboard!"></textarea>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						Link to this room: <a target="_blank" class="highlight" id="link">.</a>
-					</td>
-				</tr>
-				<tr>
-					<td id="reset">
-						
-					</td>
-					<td id="pause">
-						
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="file" id="odpfile" accept=".odp" />
-					</td>
-					<td>
-						<button id="submitodp">Submit Template</button>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2" id="iframeCell">
-						
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<button id="setBG">Set Background</button>
-					</td>
-					<td>
-						<button id="removeBG">Remove Background</button>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<button id="renderwhiteboards" class="hide">Export Whiteboards to PDF</button>
-					</td>
-					<td>
-						<button onclick="location.href = './restore';">Restore a Room</button>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<button class="dangerous" id="deleteRoom">Delete Room</button>
-					</td>
-					<td>
-						<button class="dangerous" id="deleteAllRooms">Delete All Rooms</button>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</body>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" id="canvasCell">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div id="richTextButtons" class="hide">
+                                <button id="bold" class="richTextButton"><b>B</b></button>
+                                <button id="italics" class="richTextButton"><i>I</i></button>
+                                <button id="black" class="richTextButton">&nbsp;</button>
+                                <button id="red" class="richTextButton">&nbsp;</button>
+                                <button id="blue" class="richTextButton">&nbsp;</button>
+                                <button id="green" class="richTextButton">&nbsp;</button>
+                                <button id="yellow" class="richTextButton">&nbsp;</button>
+                                <button id="purple" class="richTextButton">&nbsp;</button>
+                                <button id="pink" class="richTextButton">&nbsp;</button>
+                                <button id="pagebreak" class="richTextButton">P</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <div id="tooltip" class="hide">?
+                                <span id="help">
+                                    <p>Type some text into the text area on the left and it will appear on the whiteboard in the movement area</p>
+                                    <p>To put some text in bold, place asterisks on either side like so:</p>
+                                    <p class="demo">*This is in bold.*</p>
+                                    <p>To put some text in italics, place underscores on either side like so:</p>
+                                    <p class="demo">_This is in italics._</p>
+                                    <p>To change the colour of the text, write the name of the colour in curly brackets like so:</p>
+                                    <p class="demo">{red}This is in red.</p>
+                                    <p>To force a page break, type {pagebreak} like so:</p>
+                                    <p class="demo">This is on page 1.<br />{pagebreak}<br />This is on page 2.</p>
+                                </span>
+                            </div>
+                            <textarea id="whiteboard" class="hide highlight" rows="7" cols="65" placeholder="Write something on the whiteboard!"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Link to this room: <a target="_blank" class="highlight" id="link">.</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="reset">
+
+                        </td>
+                        <td id="pause">
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="file" id="odpfile" accept=".odp" />
+                            <label for="odpfile" class="upload_btn">Upload</label>
+                        </td>
+                        <td>
+                            <button id="submitodp">Submit Template</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" id="iframeCell">
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button id="setBG">Set Background</button>
+                        </td>
+                        <td>
+                            <button id="removeBG">Remove Background</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button id="renderwhiteboards" class="hide">Export Whiteboards to PDF</button>
+                        </td>
+                        <td>
+                            <button onclick="location.href = './restore';">Restore a Room</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="dangerous" id="deleteRoom">Delete Room</button>
+                        </td>
+                        <td>
+                            <button class="dangerous" id="deleteAllRooms">Delete All Rooms</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <footer>
+            <div class="c">
+                <div class="footer_section">
+                    <div class="copyright_txt">copyright 2020 mayvin</div>
+                    <div class="copyright_seperator">-</div>
+                    <a class="footer_menu" target="_blank" href="https://mayvin.co.uk/terms-and-conditions"><span>Terms & conditions</span></a>
+                    <a class="footer_menu" target="_blank" href="https://mayvin.co.uk/privacy-policy"><span>privacy policy</span></a>
+                    <a class="footer_menu backtotop"><span>Back to top</span></a>
+                </div>
+            </div>
+        </footer>
+    </body>
 </html>

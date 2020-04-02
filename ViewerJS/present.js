@@ -1,4 +1,4 @@
-socket = io("http://86.169.164.85:3000");
+socket = io("http://localhost:3000");
 var room;
 
 socket.on("connect", function() {
