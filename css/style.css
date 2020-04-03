@@ -449,7 +449,7 @@ textarea.highlight{
     line-height: 1.4;
     text-align: left;
     color: #000;
-    min-width: 270px;
+    width: 87%;
     margin: 0;
     height: 50px;
     resize: none;
