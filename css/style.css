@@ -434,6 +434,7 @@ button:hover:after , button.dangerous:hover:after, .upload_btn:hover:after{
     color: #000;
     border: none;
     text-align: center;
+    margin-right: 20px;
 }
 .richTextButton:active, .richTextButton:hover{
     outline: none;
