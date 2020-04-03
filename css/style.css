@@ -467,6 +467,7 @@ select {
 .button_grids {
     margin: 0 -10px;
     font-size: 0;
+    text-align: left;
 }
 .inputfile {
     padding-top: 30px;
