@@ -89,21 +89,26 @@
                 </tbody>
             </table>
             <div class="button_grids">
-                <div class="button_grid">
-                    <input type="file" id="odpfile" accept=".odp" />
-                    <label for="odpfile" class="upload_btn">Upload</label>
-                </div>
                 <div class="button_grid" id="reset"></div>
                 <div class="button_grid" id="pause"></div>
-                <div class="button_grid">
+            </div>
+            <div class="button_grids">
+                <div class="button_grid" id="renderwhiteboards">
+                    <button>Export Whiteboards to PDF</button>
+                </div>
+            </div>
+            <div class="button_grids"><div class="button_grid">
+                    <input type="file" id="odpfile" accept=".odp" />
+                    <label for="odpfile" class="upload_btn">Upload</label>
+                </div><div class="button_grid">
                     <button id="submitodp">Submit Template</button>
                 </div><div class="button_grid">
                     <button id="setBG">Set Background</button>
                 </div><div class="button_grid">
                     <button id="removeBG">Remove Background</button>
-                </div><div class="button_grid" id="renderwhiteboards">
-                    <button>Export Whiteboards to PDF</button>
-                </div><div class="button_grid">
+                </div></div>
+            <div class="button_grids">
+                <div class="button_grid">
                     <button onclick="location.href = './restore';">Restore a Room</button>
                 </div><div class="button_grid">
                     <button class="dangerous" id="deleteRoom">Delete Room</button>
